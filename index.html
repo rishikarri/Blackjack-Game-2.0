@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Blackjack</title>
+
+		<link rel="stylesheet" type="text/css" href="styles.css">
+
+		<!-- bring in jquery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+		<script src='scripts.js'></script>
+
+	</head>
+	<body>
+
+		
+		<div id="game-wrapper">
+			<h1>Welcome to the Blackjack table!</h1>
+
+			<div>
+				<img id="dealer" src="Images/potential-dealers/potential-dealer.png">
+			</div>
+
+			<div id="table-container">
+				<div id="table">
+				<!-- Put deck at top right of the table	 -->
+					<img class="deck" src="Images/cards/deck.png">
+
+					<!-- dealer's hand container -->
+					<div id="dealer-hand-container">
+						<div class="card card-1"></div>
+						<div class="card card-2"></div>
+						<div class="card card-3"></div>
+						<div class="card card-4"></div>
+						<div class="card card-5"></div>
+						<div class="card card-6"></div>
+					</div>
+					<!-- player's hand container -->
+					<div id="player-hand-container">
+						<div class="card card-1"></div>
+						<div class="card card-2"></div>
+						<div class="card card-3"></div>
+						<div class="card card-4"></div>
+						<div class="card card-5"></div>
+						<div class="card card-6"></div>
+					</div>
+					<!-- Let's make buttons hit, deal and stand -->
+					<div id="button-container1">
+						<button id="deal-button">Deal</button>
+						<button id="hit-button">Hit</button>
+						<button id="stand-button">Stand</button>
+					</div>	
+					
+
+					<div id="beer-section">
+						<!-- <button id="drink-beer">Drink</button> -->
+						<img id="beer" src="Images/beerMug.png">
+						<button onclick="drinkBeer()" id="drink-beer">Drink Me :)</button>
+					</div>
+
+				</div>
+				
+				<div id="table-leg-left">
+				</div>
+
+				<div id="table-leg-left2">
+				</div>
+
+				<div id="table-leg-right">
+				</div>
+				<div id="table-leg-right2">
+				</div>
+
+				
+
+			</div>
+
+			<!-- Items to move onto the table -->
+			
+
+			
+		</div>
+
+	</body>
+</html>
