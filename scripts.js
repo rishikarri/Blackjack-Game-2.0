@@ -2,7 +2,10 @@
 // ------------------GLOBALS------------------------
 // -------------------------------------------------
 
-var theDeck = []
+var theDeck = [];
+var playersHand = [];
+var dealersHand = [];
+
 
 $(document).ready(function(){
 	//program deal button
@@ -10,6 +13,17 @@ $(document).ready(function(){
 		// when user hits deal, we need to create the deck and then shuffle it
 		createDeck();
 		shuffleDeck();
+
+		//let's give the carcs to the dealer and player in teh following order: player,dealer,player,dealer
+		playersHand.push(theDeck.shift());
+		dealersHand.push(theDeck.shift());
+		playersHand.push(theDeck.shift());
+		dealersHand.push(theDeck.shift());
+
+		console.log(playersHand);
+		console.log(dealersHand);
+		console.log(theDeck);
+
 	});
 
 
