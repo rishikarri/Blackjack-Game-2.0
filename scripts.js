@@ -9,7 +9,11 @@ var dealersHand = [];
 var hitCardLocation = 2;
 
 
+
 $(document).ready(function(){
+	// start off by disabling the hit and stand button 
+	disableButton("hit");
+	disableButton("stand");
 	//program deal button
 	$("#deal-button").click(function(){
 		// when user hits deal, we need to create the deck and then shuffle it
@@ -33,14 +37,18 @@ $(document).ready(function(){
 		console.log(playersHand);
 		console.log(dealersHand);
 		console.log(theDeck);
+
+		// after user deals, enable hit and stand button
 		disableButton("deal");
+		enableButton("hit");
+		enableButton("stand");
+
+
+
 
 	});
 
-	$('#hit-button').click(function(){
-		
-		
-
+	$('#hit-button').click(function(){				
 		playersHand.push(theDeck.shift());
 		placeCard("player", hitCardLocation, playersHand[hitCardLocation]);
 		console.log(theDeck);
@@ -105,6 +113,10 @@ function placeCard(who, cardLocation, whatCard){
 
 function disableButton(typeOfButton){
 	$('#'+typeOfButton+'-button').attr("disabled", "disabled");
+}
+
+function enableButton(typeOfButton){
+	$('#'+typeOfButton+'-button').removeAttr("disabled");
 }
 
 // $(document).ready(function(){
