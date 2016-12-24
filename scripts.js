@@ -34,9 +34,6 @@ $(document).ready(function(){
 		placeCard("dealer" ,1, dealersHand[1]);
 
 
-		console.log(playersHand);
-		console.log(dealersHand);
-		console.log(theDeck);
 
 		// after user deals, enable hit and stand button
 		disableButton("deal");
@@ -50,9 +47,9 @@ $(document).ready(function(){
 
 	$('#hit-button').click(function(){				
 		playersHand.push(theDeck.shift());
-		placeCard("player", hitCardLocation, playersHand[hitCardLocation]);
-		console.log(theDeck);
+		placeCard("player", hitCardLocation, playersHand[hitCardLocation]);		
 		hitCardLocation++;
+		calcTotal(playersHand,"player");
 	})
 
 
@@ -107,8 +104,7 @@ function placeCard(who, cardLocation, whatCard){
 	// location to target 
 	var placement = $('#'+who+'-hand-container' + ' .card-'+cardLocation);
 
-	placement.html('<img src="Images/cards/'+whatCard+'.png">');	
-	console.log('hi');
+	placement.html('<img src="Images/cards/'+whatCard+'.png">');		
 }
 
 function disableButton(typeOfButton){
@@ -119,7 +115,28 @@ function enableButton(typeOfButton){
 	$('#'+typeOfButton+'-button').removeAttr("disabled");
 }
 
-// $(document).ready(function(){
-// 	placeCard("dealer", 5, "10c");
+function calcTotal(hand, who){
+	// loop through each card in the hand and calculate calcTotal
+	var total = 0; 
 
-// })
+	for (let i = 0; i < hand.length; i++){
+		var cardValue = Number(hand[i].slice(0, -1));
+		//check if faceCard, if so, set it to 10
+
+		if(cardValue > 10){
+			cardValue = 10;
+		}
+		console.log(cardValue);
+		total+= cardValue;
+
+	}
+	// $("#speech-bubble").html("you win!");
+	
+}
+
+// testing section
+$(document).ready(function(){
+	// placeCard("dealer", 5, "10c");
+	// calcTotal(playersHand, "player");
+
+})

@@ -1,6 +1,10 @@
-/* Styling for top portion */
+ /* Styling for top portion */
 html{
 	background-image: url("Images/background-image-clubs.jpeg")
+}
+
+h1{
+	margin-bottom: 50px;
 }
 
 img{
@@ -16,10 +20,31 @@ img{
 h1{
 	color: white;
 }
+#dealer-section{
+	position: relative;
+}
 
-#dealer{
+#speech-bubble{
+	display: inline-block;
+	position: absolute;
+	background-color: white;
 	height: 100px;
-	width: 104px;
+	width: 200px;
+	border-radius: 50%;
+	top: -8px;
+	line-height: 100px;
+	
+}
+
+#speech-bubble-tail{
+	display: inline-block;
+	position: absolute;
+	left: 53%;
+	top: 52px;
+	width: 81px;
+	height: 11px;
+	border-radius: 100% 0% 0% 0%;
+	background-color: white;
 }
 
 /* Styling for the table */
@@ -27,7 +52,7 @@ h1{
 #table-container{
 	position: relative;
 	height: 380px;
-	margin-top: -10px;
+	margin-top: -17px;
 }
 
 #table{
