@@ -5,6 +5,8 @@
 var theDeck = [];
 var playersHand = [];
 var dealersHand = [];
+//start it at two because by the time the user deals, slots 0 and 1 will be taken up
+var hitCardLocation = 2;
 
 
 $(document).ready(function(){
@@ -20,14 +22,34 @@ $(document).ready(function(){
 		playersHand.push(theDeck.shift());
 		dealersHand.push(theDeck.shift());
 
+		//now that the dealer and player have the correct cards, we have to actually place the cards on the screen
+		// 	placeCard("dealer", 5, "10c");
+		placeCard("player" ,0, playersHand[0]);
+		placeCard("player" ,1, playersHand[1]);
+		placeCard("dealer" ,0, dealersHand[0]);
+		placeCard("dealer" ,1, dealersHand[1]);
+
+
 		console.log(playersHand);
 		console.log(dealersHand);
 		console.log(theDeck);
+		disableButton("deal");
 
 	});
 
+	$('#hit-button').click(function(){
+		
+		
+
+		playersHand.push(theDeck.shift());
+		placeCard("player", hitCardLocation, playersHand[hitCardLocation]);
+		console.log(theDeck);
+		hitCardLocation++;
+	})
+
 
 })
+
 
 // when the user drinks a beer - add class lit to sway the table
 
@@ -71,3 +93,21 @@ function drinkBeer(){
 
 }
 
+// Takes in dealer or player, cardSlot location, and what type of card and then places the image on teh page
+function placeCard(who, cardLocation, whatCard){
+	var newHTML = ""; 
+	// location to target 
+	var placement = $('#'+who+'-hand-container' + ' .card-'+cardLocation);
+
+	placement.html('<img src="Images/cards/'+whatCard+'.png">');	
+	console.log('hi');
+}
+
+function disableButton(typeOfButton){
+	$('#'+typeOfButton+'-button').attr("disabled", "disabled");
+}
+
+// $(document).ready(function(){
+// 	placeCard("dealer", 5, "10c");
+
+// })
