@@ -25,7 +25,7 @@ h1{
 }
 
 #speech-bubble{
-	display: inline-block;
+	display: none;
 	position: absolute;
 	background-color: white;
 	height: 100px;
@@ -37,7 +37,7 @@ h1{
 }
 
 #speech-bubble-tail{
-	display: inline-block;
+	display: none;
 	position: absolute;
 	left: 53%;
 	top: 52px;
@@ -155,10 +155,16 @@ button{
 
 #button-container1{
 	position: absolute;
-	bottom: 14px;
-	left: 39%;
+	bottom: 48px;
+	left: 28%;
 
 }
+
+#hit-button{
+	padding-right: 23.5px;
+	padding-left: 23.5px;
+}
+
 
 #deal-button{
 	background-color: #048BA8;
@@ -172,6 +178,12 @@ button{
 #stand-button{
 	background-color: #EF6461;		
 }
+
+#reset-button{
+	display: i;
+
+
+}
 /* Styling for beer */
 
 #beer{
@@ -182,10 +194,11 @@ button{
 
 #drink-beer{
 	position: absolute;
-	right: 18%;
-	bottom: 51px;
+	right: 7%;
+	bottom: 87px;
 	background-color: gold;
 }
+
 
 /* add styling so that the table moves when the user drinks a beer */
 .lit{
@@ -212,9 +225,15 @@ button{
 /* styling for cards */
 
 .card{
-	background-color: blue;
+	/* background-color: blue; */
 	height: 80px;
 	width: 57px;
 	margin-right: 3px;
 	display: inline-block;
+	transition:  3s;
 }
+
+.card:hover{
+	transform: rotateY(-180deg);
+}
+

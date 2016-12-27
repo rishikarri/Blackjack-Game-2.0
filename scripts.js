@@ -49,7 +49,44 @@ $(document).ready(function(){
 		playersHand.push(theDeck.shift());
 		placeCard("player", hitCardLocation, playersHand[hitCardLocation]);		
 		hitCardLocation++;
-		calcTotal(playersHand,"player");
+		var playerTotal = calcTotal(playersHand,"player");
+		if (playerTotal > 21){
+			//player Lost
+			checkWin("player", playerTotal);
+		}
+	})
+
+	$('#stand-button').click(function(){				
+		//player has chosen to stand
+		var dealerTotal = calcTotal(dealersHand);
+		var dCardLocation = 2; 
+		while(dealerTotal < 17){
+			dealersHand.push(theDeck.shift());
+			placeCard("dealer" , dCardLocation, dealersHand[dCardLocation]);
+
+			dCardLocation++;
+			dealerTotal = calcTotal(dealersHand);
+			console.log("hi");
+
+		}
+		
+		checkWin();
+	})
+
+	$("#reset-button").click(function(){
+		// when player presses reset, enable the deal button, create a new deck and shuffle it
+		enableButton("deal");
+		createDeck();
+		shuffleDeck();
+		clearSpeechBubble();
+		playersHand = [];
+		dealersHand = [];
+		//reset hit card location to 2 so that you don't pass the wrong location to the playershand and or dealershand
+		hitCardLocation = 2; 
+
+		$(".card").html("");
+		console.log(theDeck);		
+
 	})
 
 
@@ -103,9 +140,10 @@ function placeCard(who, cardLocation, whatCard){
 	var newHTML = ""; 
 	// location to target 
 	var placement = $('#'+who+'-hand-container' + ' .card-'+cardLocation);
-
+	console.log("whatCard" + whatCard);
 	placement.html('<img src="Images/cards/'+whatCard+'.png">');		
 }
+
 
 function disableButton(typeOfButton){
 	$('#'+typeOfButton+'-button').attr("disabled", "disabled");
@@ -115,7 +153,9 @@ function enableButton(typeOfButton){
 	$('#'+typeOfButton+'-button').removeAttr("disabled");
 }
 
-function calcTotal(hand, who){
+// returns the total when given a hand
+
+function calcTotal(hand){
 	// loop through each card in the hand and calculate calcTotal
 	var total = 0; 
 
@@ -126,12 +166,92 @@ function calcTotal(hand, who){
 		if(cardValue > 10){
 			cardValue = 10;
 		}
+
+		if (cardValue === 1){
+			//if it's an ace, make it a 1 or 11 based on whether or not they bust 
+			if(total + 11 > 21){
+				cardValue = 1;
+			}else{
+				cardValue = 11;	
+			}
+		}
 		console.log(cardValue);
+
 		total+= cardValue;
 
+
 	}
+	return total;
+	
 	// $("#speech-bubble").html("you win!");
 	
+}
+
+function checkWin(){
+	var playerTotal = calcTotal(playersHand, "player");
+	var dealerTotal = calcTotal(dealersHand, "dealer");
+
+	if (playerTotal > 21){
+		$("#speech-bubble").html("BUST - he he he - you lose!");
+		dealerSpeak();
+		
+		
+
+		disableButton("hit");
+		disableButton("stand");
+
+	}else if (dealerTotal > 21){
+		$("#speech-bubble").html("Dealer Busts - YOU WIN!");
+		dealerSpeak();
+				
+		disableButton("hit");
+		disableButton("stand");
+
+
+	}else if(playerTotal > dealerTotal){
+		$("#speech-bubble").html("You win!");
+		dealerSpeak();
+		disableButton("hit");
+		disableButton("stand");
+	}else if(playerTotal < dealerTotal){
+		$("#speech-bubble").html("You lose!");
+		dealerSpeak();
+		disableButton("hit");
+		disableButton("stand");
+	}else{
+		//they are equal
+		$("#speech-bubble").html("Push! You have the same total as me!");
+		dealerSpeak();
+		disableButton("hit");
+		disableButton("stand");
+	}
+	
+}
+
+// displays the dealer's words and then clears them after four seconds
+function dealerSpeak(){
+
+
+		$("#speech-bubble").css({
+			"display": "inline-block"
+		})
+		$("#speech-bubble-tail").css({
+			"display": "inline-block"
+		})
+
+		// now that you have told the player they lost, clear the speech bubble after a few seconds
+
+		setTimeout(clearSpeechBubble, 4000);
+}
+function clearSpeechBubble(){
+	//when this function is called it should set speech bubble to none
+	$("#speech-bubble").css({
+		"display": "none"
+	})
+
+	$("#speech-bubble-tail").css({
+		"display": "none"
+	})
 }
 
 // testing section
